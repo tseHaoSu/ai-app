@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./index.css";
+import { Button } from "./components/ui/button";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -7,10 +8,15 @@ function App() {
   useEffect(() => {
     fetch("/api/hello")
       .then((res) => res.json())
-      .then((data) => setMessage(data.message))
+      .then((data) => setMessage(data.message));
   }, []);
 
-  return <p className="font-bold p-4 text-2xl" >{message}</p>
+  return (
+    <div className="p-4">
+      <p className="font-bold text-2xl">{message}</p>
+      <Button>Click me</Button>
+    </div>
+  );
 }
 
 export default App;
