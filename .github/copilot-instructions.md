@@ -9,16 +9,16 @@
 ## Key Workflows
 
 - **Install dependencies**:
-  - At root: `bun install` (installs for all packages)
-  - In package: `bun install` (client/server)
+   - At root: `bun install` (installs for all packages)
+   - In package: `bun install` (client/server)
 - **Run client**:
-  - `cd packages/client && bun run dev` (starts Vite dev server)
+   - `cd packages/client && bun run dev` (starts Vite dev server)
 - **Build client**:
-  - `bun run build` (TypeScript + Vite build)
+   - `bun run build` (TypeScript + Vite build)
 - **Run server**:
-  - `cd packages/server && bun run dev` (auto-reloads with Bun)
+   - `cd packages/server && bun run dev` (auto-reloads with Bun)
 - **Lint client**:
-  - `bun run lint` (ESLint)
+   - `bun run lint` (ESLint)
 
 ## Architecture & Patterns
 
@@ -44,17 +44,17 @@
 ## Example: Add API Endpoint
 
 - Server: Add route in `server/index.ts`:
-  ```ts
-  app.get("/api/new", (req, res) => res.json({ message: "New endpoint" }));
-  ```
+   ```ts
+   app.get('/api/new', (req, res) => res.json({ message: 'New endpoint' }));
+   ```
 - Client: Fetch from `/api/new` in React component.
 
 ## Example: Use Alias in Client
 
 - Import from `src` using alias:
-  ```ts
-  import MyComponent from "@/components/MyComponent";
-  ```
+   ```ts
+   import MyComponent from '@/components/MyComponent';
+   ```
 
 ---
 
