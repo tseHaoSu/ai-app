@@ -3,7 +3,7 @@
       // Environment setup & latest features
       "lib": ["ESNext"],
       "target": "ESNext",
-      "module": "Preserve",
+      "module": "ESNext", // ✅ Changed from "Preserve"
       "moduleDetection": "force",
       "jsx": "react-jsx",
       "allowJs": true,
@@ -21,9 +21,19 @@
       "noUncheckedIndexedAccess": true,
       "noImplicitOverride": true,
 
-      // Some stricter flags (disabled by default)
-      "noUnusedLocals": false,
-      "noUnusedParameters": false,
-      "noPropertyAccessFromIndexSignature": false
-   }
+      // ✅ Enable these for better error detection
+      "noUnusedLocals": true, // ✅ Changed from false
+      "noUnusedParameters": true, // ✅ Changed from false
+      "noPropertyAccessFromIndexSignature": false,
+
+      // ✅ Additional helpful settings
+      "esModuleInterop": true, // ✅ Added - helps with imports
+      "forceConsistentCasingInFileNames": true, // ✅ Added - prevents case issues
+      "resolveJsonModule": true, // ✅ Added - allows importing JSON
+      "isolatedModules": true // ✅ Added - required for bundlers
+   },
+
+   // ✅ Specify what to include/exclude
+   "include": ["**/*.ts"],
+   "exclude": ["node_modules", "dist", "build"]
 }
