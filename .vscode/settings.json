@@ -5,6 +5,25 @@
    "typescript.preferences.importModuleSpecifier": "relative",
    "typescript.updateImportsOnFileMove.enabled": "always",
    "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
-   }
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
+   },
+   "typescript.preferences.quotePreference": "single",
+   "typescript.preferences.autoImportFileExcludePatterns": [],
+   "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+   },
+   "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+   },
+   "editor.formatOnSave": true,
+   "editor.defaultFormatter": "esbenp.prettier-vscode",
+   "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+   },
+   "typescript.suggest.autoImports": true,
+   "javascript.suggest.autoImports": true,
+   "javascript.updateImportsOnFileMove.enabled": "always"
 }
