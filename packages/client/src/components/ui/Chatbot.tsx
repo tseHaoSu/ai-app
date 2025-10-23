@@ -15,23 +15,19 @@ type ChatResponse = {
    };
 };
 
-const Chatbot = () => {
-   const [messages, setMessages] = useState<string[]>([]);
-   const [isLoading, setIsLoading] = useState(false);
-   const conversationId = useRef(crypto.randomUUID());
-   const { register, handleSubmit, reset, watch } = useForm<FormData>({
-      mode: 'onChange',
-      defaultValues: { prompt: '' },
-   });
+type Message = {
+   content: string;
+   role: 'user' | 'bot';
+};
 
-   const promptValue = watch('prompt');
+const Chatbot = () => {
+   const [messages, setMessages] = useState<Message[]>([]);
+   const conversationId = useRef(crypto.randomUUID());
+   const { register, handleSubmit, reset, formState } = useForm<FormData>();
 
    const onSubmit = async ({ prompt }: FormData) => {
-      if (isLoading || !prompt.trim()) return;
-
-      setMessages((prev) => [...prev, prompt]);
+      setMessages((prev) => [...prev, { content: prompt, role: 'user' }]);
       reset();
-      setIsLoading(true);
 
       try {
          const { data } = await axios.post<ChatResponse>('/api/chat', {
@@ -40,11 +36,12 @@ const Chatbot = () => {
          });
          console.log(data.message);
 
-         setMessages((prev) => [...prev, data.message.message]);
+         setMessages((prev) => [
+            ...prev,
+            { content: data.message.message, role: 'bot' },
+         ]);
       } catch (error) {
          console.error('Error sending message:', error);
-      } finally {
-         setIsLoading(false);
       }
    };
 
@@ -55,13 +52,15 @@ const Chatbot = () => {
       }
    };
 
-   const isButtonDisabled = isLoading || !promptValue?.trim();
+   const isButtonDisabled = !formState.isValid;
 
    return (
       <div>
          <div>
             {messages.map((message, index) => (
-               <p key={index}>{message}</p>
+               <p key={index} className="px-4 py-2">
+                  {message.content}
+               </p>
             ))}
          </div>
          <form
@@ -77,7 +76,6 @@ const Chatbot = () => {
                className="border-0 rounded-3xl w-full focus:outline-0 resize-none p-3 text-base"
                placeholder="Ask me..."
                maxLength={1000}
-               disabled={isLoading}
             />
             <Button
                type="submit"
